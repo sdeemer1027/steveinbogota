@@ -12,6 +12,7 @@
             <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
             <li><a href="{{ route('admin.users.index') }}">Users</a></li>
             <li><a href="{{ route('admin.roles.index') }}">Roles</a></li>
+            <li><a href="{{ route('admin.permissions.index') }}">Permissions</a></li>
         </ul>
     </div>
 

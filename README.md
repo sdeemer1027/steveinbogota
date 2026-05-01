@@ -1,47 +1,71 @@
-# Steve in Bogotá - Laravel Application
+# Steve in Bogotá - Laravel RBAC Application
 
 ## Overview
 
-This is a Laravel-based web application built using:
+This is a Laravel-based web application built with:
 
 - PHP 8.0
 - Laravel Framework
 - MySQL 8.x
 - Composer
-- Laravel Breeze (authentication)
-- Role-Based Access Control (RBAC)
+- Laravel Breeze Authentication
+- Custom Role-Based Access Control (RBAC) system
 
-The system is currently in early development and focuses on:
-- User authentication
-- Role management (Admin / User)
-- Secure admin area
-- Expandable permission system
+The project is currently in active development and focuses on building a secure, scalable admin system with roles and permissions.
 
 ---
 
-## Features (Current Phase)
+## Current Features
 
-### Authentication
-- User registration
-- Login / Logout
-- Password hashing
+### Authentication System
+- User registration and login
+- Secure password hashing
 - Session-based authentication (Laravel Breeze)
 
-### Role System (RBAC)
-- Users can have multiple roles
-- Roles stored in `roles` table
-- Pivot table: `role_user`
-- Admin role implemented
+---
 
-### Admin Security Layer
-- Middleware: `is_admin`
-- Protected `/admin` route group
-- Only admin users can access admin dashboard
+### Role-Based Access Control (RBAC)
 
-### Database
-- MySQL 8.x
-- Clean migration-based schema
-- Seeder support for initial admin setup
+The system implements a full RBAC structure:
+User → Roles → Permissions
+
+
+### Roles
+- Admin role (full access)
+- User role (basic access)
+- Roles can be created via admin panel
+
+### Permissions
+- Granular permission system
+- Permissions can be assigned to roles
+- Examples:
+  - manage_users
+  - manage_roles
+  - manage_permissions
+
+### Pivot Tables
+- role_user (user-role relationship)
+- permission_role (role-permission relationship)
+
+---
+
+## Admin Panel
+
+Protected by middleware:
+- `auth`
+- `is_admin`
+
+### Admin Features
+- Dashboard (`/admin`)
+- User Management
+  - View users
+  - Assign roles to users
+- Role Management
+  - Create roles
+  - Assign permissions to roles
+- Permission Management
+  - Create permissions
+  - View permissions list
 
 ---
 
@@ -49,5 +73,4 @@ The system is currently in early development and focuses on:
 Email: admin@local.com
 
 Password: password123
-
 

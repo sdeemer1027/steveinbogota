@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\PermissionController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +42,11 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
     Route::get('/roles', [RoleController::class, 'index'])->name('admin.roles.index');
     Route::get('/roles/create', [RoleController::class, 'create'])->name('admin.roles.create');
     Route::post('/roles', [RoleController::class, 'store'])->name('admin.roles.store');
-
+    Route::get('/permissions', [PermissionController::class, 'index'])->name('admin.permissions.index');
+    Route::get('/permissions/create', [PermissionController::class, 'create'])->name('admin.permissions.create');
+    Route::post('/permissions', [PermissionController::class, 'store'])->name('admin.permissions.store');
+    Route::get('/roles/{role}/edit', [RoleController::class, 'edit'])->name('admin.roles.edit');
+    Route::post('/roles/{role}/permissions', [RoleController::class, 'updatePermissions'])->name('admin.roles.permissions.update');
 
 });
 
