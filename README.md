@@ -74,3 +74,116 @@ Email: admin@local.com
 
 Password: password123
 
+
+
+
+
+⚠️ Change this in production environments.
+
+---
+
+## Installation
+
+### 1. Clone Repository
+```bash
+git clone https://github.com/YOUR_USERNAME/steveinbogota.git
+cd steveinbogota
+
+
+Install Dependencies
+composer install
+npm install
+npm run dev
+
+
+Environment Setup
+cp .env.example .env
+php artisan key:generate
+
+
+Configure .env:
+
+DB_DATABASE=your_database
+DB_USERNAME=your_user
+DB_PASSWORD=your_password
+
+
+Run Migrations + Seeders
+php artisan migrate:fresh --seed
+
+This will:
+
+Create all tables
+Create roles
+Create permissions
+Create admin user
+Link roles to admin
+
+
+Start Server
+php artisan serve
+
+
+Admin Routes
+/admin
+/admin/users
+/admin/roles
+/admin/permissions
+
+All routes are protected by:
+
+Authentication
+Admin role middleware
+
+
+Architecture
+Backend Structure
+MVC (Laravel standard)
+Service-less design (controller-driven)
+Pivot-table RBAC system
+Middleware-based security
+
+
+Database Design
+users
+roles
+permissions
+role_user
+permission_role
+
+
+Security Layer
+Middleware: is_admin
+Role checks via Eloquent relationships
+Permission system foundation in place
+Ready for gate/policy expansion
+
+
+
+Current Status
+Completed
+ Laravel setup
+ Authentication system
+ Roles system
+ Permissions system
+ Admin panel structure
+ User role assignment
+ Role permission assignment
+
+
+ Next Phase
+ Permission enforcement (middleware/gates)
+ UI permission restrictions
+ Admin dashboard improvements
+ Activity logging system
+
+Author
+
+Steve in Bogotá Project
+dr.stevedeemer@gmail.com
+
+
+
+
+
+
