@@ -46,3 +46,7 @@ The system is currently in early development and focuses on:
 ---
 
 ## Default Admin Account (Development Only)
+Email: admin@local.com
+Password: password123
+
+
