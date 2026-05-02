@@ -111,79 +111,85 @@ DB_USERNAME=your_user
 DB_PASSWORD=your_password
 ```
 
-Run Migrations + Seeders
+### 4.Run Migrations + Seeders
+~~~
 php artisan migrate:fresh --seed
+~~~
 
 This will:
 
-Create all tables
-Create roles
-Create permissions
-Create admin user
-Link roles to admin
+- Create all tables
+- Create roles
+- Create permissions
+- Create admin user
+- Link roles to admin
 
 
-Start Server
+### 5.Start Server
+~~~
 php artisan serve
+~~~
 
-
-Admin Routes
+## Admin Routes
+~~~
 /admin
 /admin/users
 /admin/roles
 /admin/permissions
+~~~
 
 All routes are protected by:
 
-Authentication
-Admin role middleware
+- Authentication
+- Admin role middleware
 
 
-Architecture
-Backend Structure
-MVC (Laravel standard)
-Service-less design (controller-driven)
-Pivot-table RBAC system
-Middleware-based security
+## Architecture
+### Backend Structure
+- MVC (Laravel standard)
+- Service-less design (controller-driven)
+- Pivot-table RBAC system
+- Middleware-based security
 
 
-Database Design
-users
-roles
-permissions
-role_user
-permission_role
+### Database Design
+- users
+- roles
+- permissions
+- role_user
+- permission_role
 
 
-Security Layer
-Middleware: is_admin
-Role checks via Eloquent relationships
-Permission system foundation in place
-Ready for gate/policy expansion
+## Security Layer
+- Middleware: is_admin
+- Role checks via Eloquent relationships
+- Permission system foundation in place
+- Ready for gate/policy expansion
 
 
 
-Current Status
-Completed
- Laravel setup
- Authentication system
- Roles system
- Permissions system
- Admin panel structure
- User role assignment
- Role permission assignment
+## Current Status
+###Completed
+- [x] Laravel setup
+- [x]  Authentication system
+- [x]  Roles system
+- [x]  Permissions system
+- [x]  Admin panel structure
+- [x]  User role assignment
+- [x]  Role permission assignment
 
 
- Next Phase
- Permission enforcement (middleware/gates)
- UI permission restrictions
- Admin dashboard improvements
- Activity logging system
+## Next Phase
+- [ ]  Permission enforcement (middleware/gates) 
+- [ ] UI permission restrictions
+- [ ]  Admin dashboard improvements
+- [ ]  Activity logging system
 
-Author
+## Author
 
-Steve in Bogotá Project
-dr.stevedeemer@gmail.com
+### Steve in Bogotá Project
+- Dr.Steven Deemer
+- Email: dr.stevedeemer@gmail.com
 
 
 
