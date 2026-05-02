@@ -2,29 +2,44 @@
 
 @section('content')
 
-<h1>Roles</h1>
+<h1 class="mb-4">Role Management</h1>
 
-<a href="{{ route('admin.roles.create') }}">Create New Role</a>
+<a href="{{ route('admin.roles.create') }}" class="btn btn-primary mb-3">
+    Create New Role
+</a>
 
-<table border="1" cellpadding="10">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
+<div class="card shadow-sm">
+    <div class="card-body">
 
-    <tbody>
-        @foreach($roles as $role)
-            <tr>
-                <td>{{ $role->name }}</td>
-                <td>{{ $role->description }}</td>
-                <td><a href="{{ route('admin.roles.edit', $role->id) }}">Edit Permissions</a></td>
-            </tr>
-        @endforeach
-    </tbody>
-</table>
+        <table class="table table-bordered table-striped table-hover">
+
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th width="180">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach($roles as $role)
+                    <tr>
+                        <td>{{ $role->name }}</td>
+                        <td>{{ $role->description }}</td>
+
+                        <td>
+                            <a href="{{ route('admin.roles.edit', $role->id) }}"
+                               class="btn btn-sm btn-warning">
+                                Edit Permissions
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
 
 @endsection
-
