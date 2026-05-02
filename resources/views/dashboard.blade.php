@@ -11,6 +11,25 @@
                 <div class="p-6 text-gray-900">
                     {{ __("You're logged in!") }}
                 </div>
+
+
+
+
+<div class="container mt-5">
+
+    <button class="btn btn-primary">
+        <i class="bi bi-gear"></i> UI Test Button
+    </button>
+
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        console.log("DOM ready (no jQuery dependency here)");
+    });
+</script>
+
+
             </div>
         </div>
     </div>

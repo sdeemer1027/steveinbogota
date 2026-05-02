@@ -169,7 +169,7 @@ All routes are protected by:
 
 
 ## Current Status
-###Completed
+### Completed
 - [x] Laravel setup
 - [x]  Authentication system
 - [x]  Roles system
@@ -179,9 +179,9 @@ All routes are protected by:
 - [x]  Role permission assignment
 
 
-## Next Phase
+### Next Phase
 - [ ]  Permission enforcement (middleware/gates) 
-- [ ] UI permission restrictions
+- [ ]  UI permission restrictions
 - [ ]  Admin dashboard improvements
 - [ ]  Activity logging system
 
