@@ -88,25 +88,28 @@ Password: password123
 ```bash
 git clone https://github.com/YOUR_USERNAME/steveinbogota.git
 cd steveinbogota
+```
 
-
-Install Dependencies
+### 2. Install Dependencies
+```bash
 composer install
 npm install
 npm run dev
+```
 
-
-Environment Setup
+### 3.Environment Setup
+```bash
 cp .env.example .env
 php artisan key:generate
+```
 
 
-Configure .env:
-
+## Configure .env:
+```
 DB_DATABASE=your_database
 DB_USERNAME=your_user
 DB_PASSWORD=your_password
-
+```
 
 Run Migrations + Seeders
 php artisan migrate:fresh --seed
