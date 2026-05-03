@@ -12,9 +12,10 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::with('roles')->get();
+       $users = User::with('roles')->get();
+       $roles = \App\Models\Role::all();
 
-        return view('admin.users.index', compact('users'));
+        return view('admin.users.index', compact('users','roles'));
     }
 
 
@@ -27,14 +28,29 @@ class UserController extends Controller
 
    public function updateRoles(Request $request, User $user)
 {
-    $user->roles()->sync($request->roles ?? []);
+   $user->roles()->sync($request->roles ?? []);
 
-    return redirect()
-        ->route('admin.users.index')
-        ->with('success', 'Roles updated successfully.');
+
+    return response()->json([
+      'message' => 'Roles updated successfully',
+      'user_id' => $user->id,
+      'roles' => $user->roles->pluck('name')
+    ]);
+
+//return response()->json([
+//    'success' => true,
+//    'message' => 'Roles updated successfully',
+//    'roles' => $user->roles()->pluck('name')
+//]);
+
 }
 
-
+   public function getRoles(User $user)
+{
+    return response()->json([
+        'roles' => $user->roles->pluck('id')
+    ]);
+}
 
 
 }

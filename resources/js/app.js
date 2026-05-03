@@ -9,7 +9,9 @@ Alpine.start();
    ========================= */
 
 // Bootstrap
-import 'bootstrap';
+import * as bootstrap from 'bootstrap';
+window.bootstrap = bootstrap;
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Bootstrap Icons
@@ -27,3 +29,38 @@ $(document).ready(function () {
 $(document).on('click', '.btn', function () {
     console.log('Button clicked:', this);
 });
+
+
+
+
+
+
+
+
+
+
+function showToast(message, type = 'success') {
+    let toastEl = document.getElementById('appToast');
+    let toastBody = document.getElementById('toastMessage');
+
+    if (!toastEl || !toastBody) {
+        console.error('Toast elements missing in layout');
+        return;
+    }
+
+    toastBody.innerText = message;
+
+    toastEl.className = 'toast align-items-center text-bg-' + type + ' border-0';
+
+    let toast = new bootstrap.Toast(toastEl);
+    toast.show();
+}
+
+window.showToast = showToast;
+
+
+
+
+
+
+
