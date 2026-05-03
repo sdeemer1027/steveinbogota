@@ -209,6 +209,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     roleContainer.innerHTML +=
                         `<span class="badge bg-primary me-1">${role}</span>`;
                 });
+
+
+document.getElementById('userRoleModal')
+    .addEventListener('hidden.bs.modal', function () {
+        $('#userRoleForm')[0].reset();
+        $('#userRoleForm input[type="checkbox"]').prop('checked', false);
+    });
+
+
             },
 
             error: function (xhr) {

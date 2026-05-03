@@ -52,7 +52,10 @@ function showToast(message, type = 'success') {
 
     toastEl.className = 'toast align-items-center text-bg-' + type + ' border-0';
 
-    let toast = new bootstrap.Toast(toastEl);
+    let toast = new bootstrap.Toast(toastEl, {
+        autohide: true,
+        delay: 1500   // 👈 THIS is the key change
+    });
     toast.show();
 }
 
