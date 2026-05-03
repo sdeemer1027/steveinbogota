@@ -45,12 +45,15 @@ class UserController extends Controller
 
 }
 
-   public function getRoles(User $user)
+
+public function getRoles(User $user)
 {
     return response()->json([
-        'roles' => $user->roles->pluck('id')
+        'roles' => $user->roles()->pluck('roles.id')
     ]);
 }
+
+
 
 
 }
