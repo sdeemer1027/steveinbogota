@@ -1,36 +1,72 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
+@section('content')
+
+<div class="container py-4">
+
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">User Dashboard</h2>
+        <span class="badge bg-primary">STANDARD USER</span>
+    </div>
+
+    <!-- Cards -->
+    <div class="row g-3 mb-4">
+
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h6>My Account Status</h6>
+                    <h4 class="text-success">Active</h4>
                 </div>
+            </div>
+        </div>
 
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h6>Role</h6>
+                    <h4>User</h4>
+                </div>
+            </div>
+        </div>
 
+    </div>
 
+    <!-- Table -->
+    <div class="card shadow-sm">
+        <div class="card-header">
+            Recent Activity
+        </div>
 
-<div class="container mt-5">
+        <div class="card-body p-0">
 
-    <button class="btn btn-primary">
-        <i class="bi bi-gear"></i> UI Test Button
-    </button>
+            <table class="table table-striped mb-0">
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Logged In</td>
+                        <td>Today</td>
+                    </tr>
+                    <tr>
+                        <td>Profile Updated</td>
+                        <td>Yesterday</td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+
+{{--$users--}}
 
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        console.log("DOM ready (no jQuery dependency here)");
-    });
-</script>
-
-
-            </div>
-        </div>
-    </div>
-</x-app-layout>
+@endsection

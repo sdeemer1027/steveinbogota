@@ -29,7 +29,9 @@
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+<div class="container py-4">
+    @yield('content')
+</div>
             </main>
         </div>
     </body>
