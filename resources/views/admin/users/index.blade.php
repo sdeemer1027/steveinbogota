@@ -38,7 +38,9 @@ function can($permission) {
             <tbody>
                 @foreach($users as $user)
                     <tr>
-                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->name }} <a href="{{ route('members.show', $user->id) }}">
+    View Profile
+</a></td>
                         <td>{{ $user->email }}</td>
 
                         <td>

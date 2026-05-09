@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
+use App\Models\MemberProfile;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -16,25 +17,128 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        $user = $request->user();
+
+        $profile = $user->profile;
+
+        return view('profile.edit', compact('user', 'profile'));
     }
 
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(Request $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $request->validate([
+            /*
+            |--------------------------------------------------------------------------
+            | Users Table
+            |--------------------------------------------------------------------------
+            */
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255'],
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+            /*
+            |--------------------------------------------------------------------------
+            | Profile Photo
+            |--------------------------------------------------------------------------
+            */
+            'profile_photo' => [
+                'nullable',
+                'image',
+                'mimes:jpg,jpeg,png',
+                'max:2048'
+            ],
+
+            /*
+            |--------------------------------------------------------------------------
+            | Member Profile Table
+            |--------------------------------------------------------------------------
+            */
+            'first_name' => ['nullable', 'string', 'max:255'],
+            'last_name' => ['nullable', 'string', 'max:255'],
+            'phone' => ['nullable', 'string', 'max:255'],
+            'address' => ['nullable', 'string', 'max:255'],
+            'city' => ['nullable', 'string', 'max:255'],
+            'state' => ['nullable', 'string', 'max:255'],
+            'country' => ['nullable', 'string', 'max:255'],
+            'birthdate' => ['nullable', 'date'],
+            'bio' => ['nullable', 'string'],
+        ]);
+
+        $user = $request->user();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Update Users Table
+        |--------------------------------------------------------------------------
+        */
+
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+        ];
+
+        /*
+        |--------------------------------------------------------------------------
+        | Reset Email Verification if Changed
+        |--------------------------------------------------------------------------
+        */
+
+        if ($user->email !== $request->email) {
+            $data['email_verified_at'] = null;
         }
 
-        $request->user()->save();
+        /*
+        |--------------------------------------------------------------------------
+        | Handle Profile Photo Upload
+        |--------------------------------------------------------------------------
+        */
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        if ($request->hasFile('profile_photo')) {
+
+            // Delete old photo if exists
+            if ($user->profile_photo) {
+                Storage::disk('public')->delete(
+                    $user->profile_photo
+                );
+            }
+
+            // Store new photo
+            $path = $request->file('profile_photo')
+                ->store('profile-photos', 'public');
+
+            $data['profile_photo'] = $path;
+        }
+
+        // Save user auth data
+        $user->update($data);
+
+        /*
+        |--------------------------------------------------------------------------
+        | Update or Create Member Profile
+        |--------------------------------------------------------------------------
+        */
+
+        $user->profile()->updateOrCreate(
+            [
+                'user_id' => $user->id,
+            ],
+            [
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'phone' => $request->phone,
+                'address' => $request->address,
+                'city' => $request->city,
+                'state' => $request->state,
+                'country' => $request->country,
+                'birthdate' => $request->birthdate,
+                'bio' => $request->bio,
+            ]
+        );
+
+        return Redirect::route('profile.edit')
+            ->with('status', 'profile-updated');
     }
 
     /**
@@ -47,6 +151,24 @@ class ProfileController extends Controller
         ]);
 
         $user = $request->user();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Delete Profile Photo
+        |--------------------------------------------------------------------------
+        */
+
+        if ($user->profile_photo) {
+            Storage::disk('public')->delete(
+                $user->profile_photo
+            );
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Logout + Delete Account
+        |--------------------------------------------------------------------------
+        */
 
         Auth::logout();
 

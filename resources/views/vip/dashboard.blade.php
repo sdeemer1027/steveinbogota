@@ -59,27 +59,31 @@
                     </tr>
                 </thead>
 
-                <tbody>
-                    <tr>
-                        <td>VIP User 1</td>
-                        <td>vip1@example.com</td>
-                        <td><span class="badge bg-success">Active</span></td>
-                    </tr>
-                    <tr>
-                        <td>VIP User 2</td>
-                        <td>vip2@example.com</td>
-                        <td><span class="badge bg-success">Active</span></td>
-                    </tr>
-                    <tr>
-                        <td>VIP User 3</td>
-                        <td>vip3@example.com</td>
-                        <td><span class="badge bg-success">Active</span></td>
-                    </tr>
-                </tbody>
+     
 
+<tbody>
+    @forelse($vipUsers as $vipUser)
+        <tr>
+            <td>{{ $vipUser->name }}</td>
+            <td>{{ $vipUser->email }}</td>
+            <td>
+                <span class="badge bg-success">Active</span>
+            </td>
+        </tr>
+    @empty
+        <tr>
+            <td colspan="3" class="text-center">
+                No VIP users found.
+            </td>
+        </tr>
+    @endforelse
+</tbody>
+
+     
             </table>
 
         </div>
+      
     </div>
 
 </div>

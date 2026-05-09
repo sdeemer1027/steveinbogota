@@ -7,6 +7,14 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Vip\VipController;
+use App\Http\Controllers\User\UserDashboardController;
+use App\Http\Controllers\MemberController;
+
+
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +66,13 @@ Route::get('/', function () {
 | Authenticated User Routes
 |--------------------------------------------------------------------------
 */
+
+Route::middleware('auth')->group(function () {
+    Route::get('/members/{user}', [MemberController::class, 'show'])
+        ->name('members.show');
+});
+
+
 
 Route::middleware('auth')->group(function () {
 
@@ -176,6 +191,7 @@ Route::middleware(['auth', 'permission:access-vip-dashboard'])
 
     });
   */
+  /*
   Route::middleware(['auth', 'role:vip'])
     ->prefix('vip')
     ->name('vip.')
@@ -190,11 +206,27 @@ Route::middleware(['auth', 'permission:access-vip-dashboard'])
         })->name('content');
 
     });  
+*/
+
+    Route::middleware(['auth', 'role:vip'])
+    ->prefix('vip')
+    ->name('vip.')
+    ->group(function () {
+
+        Route::get('/dashboard', [VipController::class, 'dashboard'])
+            ->name('dashboard');
+
+        Route::get('/content', [VipController::class, 'content'])
+            ->name('content');
+
+    });
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified', 'role:user'])->name('dashboard');
+
+Route::get('/dashboard', [UserDashboardController::class, 'dashboard'])
+    ->middleware(['auth', 'verified', 'role:user'])
+    ->name('dashboard');
+
 
 /*
 |--------------------------------------------------------------------------

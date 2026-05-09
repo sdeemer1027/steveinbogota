@@ -9,7 +9,7 @@
         <h2 class="fw-bold">User Dashboard</h2>
         <span class="badge bg-primary">STANDARD USER</span>
     </div>
-
+{{$user}}
     <!-- Cards -->
     <div class="row g-3 mb-4">
 
@@ -65,7 +65,6 @@
         </div>
     </div>
 
-{{--$users--}}
 
 </div>
 

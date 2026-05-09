@@ -15,6 +15,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+         'profile_photo',
     ];
 
     protected $hidden = [
@@ -44,4 +45,13 @@ class User extends Authenticatable
             })
             ->exists();
     }
+public function profile()
+{
+    return $this->hasOne(MemberProfile::class);
+}
+
+
+
+
+    
 }
